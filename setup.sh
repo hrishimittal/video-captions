@@ -29,6 +29,16 @@ else
   echo "Model already present: $MODEL"
 fi
 
+VENV="${HOME}/.cache/video-captions/venv"
+if [[ ! -x "${VENV}/bin/python" ]]; then
+  echo "Creating Python venv with Pillow at ${VENV}..."
+  /bin/mkdir -p "$(dirname "$VENV")"
+  python3 -m venv "$VENV"
+  "${VENV}/bin/pip" install --quiet Pillow
+else
+  echo "Caption venv already present: $VENV"
+fi
+
 HERE="$(cd "$(dirname "$0")" && pwd)"
 /bin/mkdir -p "${HOME}/bin"
 for s in transcribe-video.sh burn-captions.sh caption-video.sh; do

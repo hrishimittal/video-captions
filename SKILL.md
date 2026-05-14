@@ -55,7 +55,9 @@ burn-captions.sh VIDEO SRT [OUTPUT]
 
 ## Caption style
 
-Burned-in style is fixed to a bold-white-on-translucent-black-box look at 1080p, modelled on YouTube auto-captions. To change it, edit the `STYLE=` line in `scripts/burn-captions.sh` (ASS `force_style` syntax).
+Captions are rendered as PNG "pills" — white text on a rounded, semi-transparent dark-gray rectangle — then composited onto the video with ffmpeg's overlay filter. Output is 1920 wide regardless of source. To tweak the look, edit the constants near the top of the inline Python block in `scripts/burn-captions.sh` (`FONT_SIZE`, `PAD_X`, `PAD_Y`, `RADIUS`, `BG`, `FG`, `MARGIN_BOTTOM`).
+
+The renderer needs Pillow, which `setup.sh` installs into `~/.cache/video-captions/venv`.
 
 ## Performance notes for the agent
 
